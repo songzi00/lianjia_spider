@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>房屋爬取系统</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body style="background-image: url({% static 'img/banner.jpg' %})">
+    <div class="main">
+        <h1>链家房源爬取系统</h1>
+        <form method="post" action="{% url 'myapp:search' %}">
+            {% csrf_token %}
+            <div class="q_div">
+                <p class="text_p">1.请选择房源类型：</p>
+                <label class="radio-inline">
+                  <input type="radio" name="house_type" id="ershou" value="ershou" required> 二手房数据
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="house_type" id="zufang" value="zufang" required> 租房数据
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="house_type" id="loupan" value="loupan" required>楼盘数据
+                </label>
+            </div>
+            <div class="q_div">
+                <p class="text_p">2.请选择区域：</p>
+                <select name="area" class="form-control" required>
+                    <option value="luohuqu">罗湖区</option>
+                    <option value="futianqu">福田区</option>
+                    <option value="nanshanqu">南山区</option>
+                    <option value="yantianqu">盐田区</option>
+                    <option value="baoanqu">宝安区</option>
+                    <option value="longgangqu">龙岗区</option>
+                    <option value="longhuaqu">龙华区</option>
+                    <option value="guangmingqu">光明区</option>
+                    <option value="pingshanqu">坪山区</option>
+                    <option value="dapengxinqu">大鹏新区</option>
+                </select>
+            </div>
+            <div class="b_div">
+                <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">爬取</button>
+            </div>
+        </form>
+
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        您已成功启动爬虫！稍后可以在data文件中看到数据表格。
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">关闭
+                        </button>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+</body>
+</html>
